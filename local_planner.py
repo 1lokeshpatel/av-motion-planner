@@ -89,7 +89,7 @@ class LocalPlanner:
         # ------------------------------------------------------------------
         if len(waypoints)-1 == goal_index:
             delta_x = waypoints[goal_index][0] - waypoints[goal_index-1][0]
-            delta_y = waypoints[goal_index][0] - waypoints[goal_index-1][1]
+            delta_y = waypoints[goal_index][1] - waypoints[goal_index-1][1]
         else:
             delta_x = waypoints[goal_index+1][0] - waypoints[goal_index][0]
             delta_y = waypoints[goal_index+1][1] - waypoints[goal_index][1]
