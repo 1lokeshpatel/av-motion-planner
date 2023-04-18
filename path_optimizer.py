@@ -173,10 +173,10 @@ class PathOptimizer:
         # Try to vectorize the code using numpy functions for speed if you can.
         # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
         # ------------------------------------------------------------------
-        # t_points = ...
-        # x_points = ...
-        # y_points = ...
-        # return [x_points, y_points, t_points]
+        t_points = self.thetaf(a,b,c,d,s_points)
+        x_points = scipy.integrate.cumtrapz(np.cos(t_points), s_points, initial=None)
+        y_points = scipy.integrate.cumtrapz(np.sin(t_points), s_points, initial=None)
+        return [x_points, y_points, t_points]
         # ------------------------------------------------------------------
 
     ######################################################
