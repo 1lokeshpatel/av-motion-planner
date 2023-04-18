@@ -74,7 +74,7 @@ class PathOptimizer:
         # has a lower limit of the straight line arc length.
         # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
         # ------------------------------------------------------------------
-        bounds = [[-0.5,0.5],[-0.5,0.5],[sf_0, max]]
+        bounds = [[-0.5,0.5],[-0.5,0.5],[sf_0, 100000000]]
         # ------------------------------------------------------------------
 
         # Here we will call scipy.optimize.minimize to optimize our spiral.
@@ -84,7 +84,7 @@ class PathOptimizer:
         # optimization methods.
         # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
         # ------------------------------------------------------------------
-        res = scipy.optimize.minimize(self.objective, p0, bounds=bounds, method='L-BFGS', jac=self.objective_grad)
+        res = scipy.optimize.minimize(fun=self.objective, x0=p0, bounds=bounds, method='L-BFGS-B', jac=self.objective_grad)
         # ------------------------------------------------------------------
 
         spiral = self.sample_spiral(res.x)
@@ -116,9 +116,7 @@ class PathOptimizer:
         # ------------------------------------------------------------------
         # # Remember that a, b, c, d and s are lists
         # ...
-        thetas = []
-        for i in range(len(a)):
-            thetas[i] = a[i]*s[i] + ((b[i]/2)*(s[i]**2)) + ((c[i]/3)*(s[i]**3)) + ((d[i]/4)*(s[i]**4))
+        thetas = a*s + (b/2)*(s**2) + (c/3)*(s**3) + (d/4)*(s**4)
         return thetas
         # ------------------------------------------------------------------
 
