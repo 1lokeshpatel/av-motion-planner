@@ -231,7 +231,7 @@ class VelocityPlanner:
             for i in reversed(range(stop_index)):
                 dist = np.linalg.norm([path[0][i+1] - path[0][i], 
                                        path[1][i+1] - path[1][i]])
-                vi = calc_final_speed(vf, -self._a_max, dist)
+                vi = calc_final_speed(vf, self._a_max, dist)
                 # We don't want to have points above the starting speed
                 # along our profile, so clamp to start_speed.
                 if vi > start_speed:
@@ -528,7 +528,11 @@ def calc_final_speed(v_i, a, d):
 
     # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
     # ------------------------------------------------------------------
-    v_f = sqrt(v_i**2 + (2*a*d))
+    val = v_i**2 + (2*a*d)
+    if val > 0:
+        v_f = sqrt(val)
+    else:
+        v_f = 0
     return v_f
     # ------------------------------------------------------------------
 

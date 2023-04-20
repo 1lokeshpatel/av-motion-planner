@@ -13,7 +13,7 @@ from math import sin, cos, pi, sqrt
 
 class CollisionChecker:
     def __init__(self, circle_offsets, circle_radii, weight):
-        self._circle_offsets = circle_offsets
+        self._circle_offsets = np.array(circle_offsets)
         self._circle_radii   = circle_radii
         self._weight         = weight
 
@@ -28,7 +28,6 @@ class CollisionChecker:
     # Takes in a set of paths and obstacles, and returns an array
     # of bools that says whether or not each path is collision free.
     def collision_check(self, paths, obstacles):
-        circle_offsets = np.array(self._circle_offsets)
         """Returns a bool array on whether each path is collision free.
 
         args:
@@ -83,8 +82,8 @@ class CollisionChecker:
 
                 # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                 # --------------------------------------------------------------
-                circle_locations[:, 0] = path[0][j] + circle_offsets*int(np.cos(path[2][j]))
-                circle_locations[:, 1] = path[1][j] + circle_offsets*int(np.sin(path[2][j]))
+                circle_locations[:, 0] = path[0][j] + self._circle_offsets * cos(path[2][j])
+                circle_locations[:, 1] = path[1][j] + self._circle_offsets * sin(path[2][j])
                 # --------------------------------------------------------------
 
                 # Assumes each obstacle is approximated by a collection of
@@ -165,9 +164,9 @@ class CollisionChecker:
                 # A lower score implies a more suitable path.
                 # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                 # --------------------------------------------------------------
-                length = len(paths[i][0]) - 1
+ 
                 # objective function for distance to centerline score
-                score = np.sqrt((goal_state[0]-paths[i][0][length])**2 + (goal_state[1]-paths[i][1][length])**2)
+                score = np.sqrt((goal_state[0]-paths[i][0][-1])**2 + (goal_state[1]-paths[i][1][-1])**2)
                 # --------------------------------------------------------------
 
                 # Compute the "proximity to other colliding paths" score and
@@ -180,7 +179,7 @@ class CollisionChecker:
                         if not collision_check_array[j]:
                             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                             # --------------------------------------------------
-                            score += self._weight * paths[i][2][j]
+                            score += self._weight * sqrt((paths[i][1][-1] - paths[j][1][-1])**2 + (paths[i][0][-1] - paths[j][0][-1])**2)
                             # --------------------------------------------------
 
                             pass

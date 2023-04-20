@@ -10,6 +10,7 @@
 import numpy as np
 import scipy.optimize
 import scipy.integrate
+import sys
 from math import sin, cos, pi, sqrt
 
 class PathOptimizer:
@@ -74,7 +75,7 @@ class PathOptimizer:
         # has a lower limit of the straight line arc length.
         # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
         # ------------------------------------------------------------------
-        bounds = [[-0.5,0.5],[-0.5,0.5],[sf_0, 100000000]]
+        bounds = [[-0.5,0.5],[-0.5,0.5],[sf_0, sys.maxsize]]
         # ------------------------------------------------------------------
 
         # Here we will call scipy.optimize.minimize to optimize our spiral.
