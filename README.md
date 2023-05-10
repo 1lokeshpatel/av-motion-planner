@@ -4,3 +4,13 @@ This repository contains all the tools for a motion planner for self-driving car
 
 The blueprint for testing and development for the motion planner is provided by the Self-Driving Car Specialization from CourseEra/University of Toronto. The controller design is implemented from [controller design repo](https://github.com/1lokeshpatel/self-driving-vehicle-controller) and is contained in `controller2d.py`.
 
+## Explanation of Motion Planning Pipeline
+
+### Behaviour Planning
+
+### Collision Checking
+
+### Local Planning
+
+### Path Optimization
+
